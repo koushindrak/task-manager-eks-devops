@@ -1,0 +1,9 @@
+replicaCount: 1
+image:
+  repository: saumya05/userservice
+  tag: latest
+  pullPolicy: Always
+service:
+  type: ClusterIP
+  port: 8080
+
