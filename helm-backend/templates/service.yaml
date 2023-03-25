@@ -8,6 +8,6 @@ spec:
   ports:
   - name: http
     port: {{ .Values.service.port }}
-    targetPort: 8080
+    targetPort: 2612
   type: {{ .Values.service.type }}
 
