@@ -17,7 +17,7 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 8080
+        - containerPort: 2612
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "production"
