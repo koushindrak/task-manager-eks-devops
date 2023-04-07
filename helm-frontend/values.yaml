@@ -7,5 +7,5 @@ service:
   type: NodePort
   port: 80
 ingress:
-  host: *.cloudcomputing.com
+  host: frontend.cloudcomputing.com
 
