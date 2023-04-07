@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: 906269103174.dkr.ecr.us-east-1.amazonaws.com/backend
+  repository: 572468360775.dkr.ecr.us-east-1.amazonaws.com/backend
   tag: latest
   pullPolicy: Always
 service:
