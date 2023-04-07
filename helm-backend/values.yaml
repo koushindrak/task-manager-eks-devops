@@ -4,8 +4,8 @@ image:
   tag: latest
   pullPolicy: Always
 service:
-  type: ClusterIP
-  port: 80
+  type: LoadBalancer
+  port: 2612
 ingress:
   host: backend.cloudcomputing.com
 
