@@ -20,5 +20,5 @@ spec:
         - containerPort: 2612
         env:
         - name: SPRING_PROFILES_ACTIVE
-          value: "production"
+          value: "prod"
 
