@@ -1,0 +1,59 @@
+pipeline{
+    agent any
+        stages{
+        stage("CodeCheckout"){
+            steps{
+               git branch: '${BranchName}',
+               credentialsId: '3acca39b-f8ab-481f-b762-aa55ef29a5dc' , 
+               url: 'https://github.com/koushindrak/task-manager-backend.git'
+               sh 'echo Git login successful'
+                 }
+        }
+        
+        stage("Build"){
+            steps{
+                script {
+                  env.TAG = sh(script: '\
+                  tag=$(date +%Y%m%d%H%M%S)-${EnvironmentName}-${BranchName} && echo "$tag" \
+                  ', returnStdout: true)
+                  env.IMAGE = sh(script: '\
+                  rawimage=$(docker build -t 572468360775.dkr.ecr.us-east-1.amazonaws.com/backend:$TAG . 2>&1) \
+                  echo 572468360775.dkr.ecr.us-east-1.amazonaws.com/backend:$TAG \
+                  ' , returnStdout: true)
+                   
+                }
+            }
+         }
+         
+         
+
+         stage("Upload to ECR"){
+             steps{
+                 script{
+                        def token = sh(returnStdout: true, script: "aws ecr get-login-password --region us-east-1").trim()
+                        sh "echo ${token} | docker login --username AWS \
+                        --password-stdin 572468360775.dkr.ecr.us-east-1.amazonaws.com"
+                        sh "docker push ${IMAGE}"
+                        sh "rm -rf *"
+                  
+                    }
+                }
+         }
+         
+         stage("DEPLOY"){
+             steps{
+                 sh '''
+                 ls
+                 pwd
+                 cd helm-backend
+                 export KUBECONFIG=/config
+                 helm upgrade backend . --set image.tag=${TAG}
+                 echo ========Backend Application Deployed successfully=========
+                 '''
+                }
+         }
+        
+             
+
+    }
+}
