@@ -4,7 +4,7 @@ image:
   tag: latest
   pullPolicy: Always
 service:
-  type: NodePort
+  type: LoadBalancer
   port: 80
 ingress:
   host: frontend.cloudcomputing.com
