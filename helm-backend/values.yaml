@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: 572468360775.dkr.ecr.us-east-1.amazonaws.com/backend
-  tag: latest
+  tag: v6
   pullPolicy: Always
 service:
   type: LoadBalancer
